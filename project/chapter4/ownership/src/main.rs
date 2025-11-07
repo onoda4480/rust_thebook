@@ -1,3 +1,34 @@
+fn main() {
+    // String型
+    let my_string = String::from("hello world");
+
+    // 型を確認する小技
+    // my_stringの型は？
+    let _type_check: String = my_string.clone();
+    // ↑ String型だと確認できる
+
+    // 文字列リテラルの型
+    let my_literal = "hello world";
+
+    // 型を確認
+    let _type_check: &str = my_literal;
+    // ↑ &str型だと確認できる
+
+    println!("my_string の型: String");
+    println!("my_literal の型: &str");
+
+    // だから...
+    println!("\n--- 関数呼び出し ---");
+
+    // Stringは&を付ける
+    first_word(&my_string);
+    println!("✅ first_word(&my_string) - &を付けた");
+
+    // &strはそのまま
+    first_word(my_literal);
+    println!("✅ first_word(my_literal) - そのまま");
+}
+
 fn first_word(s: &str) -> &str {
     let bytes = s.as_bytes();
 
@@ -8,30 +39,4 @@ fn first_word(s: &str) -> &str {
     }
 
     &s[..]
-}
-
-fn main() {
-    let my_string = String::from("hello world");
-
-    // ✅ 方法1: Stringの参照（自動的に&strに変換される）
-    let word = first_word(&my_string);
-    println!("方法1: {}", word);
-
-    // ✅ 方法2: Stringのスライス全体
-    let word = first_word(&my_string[..]);
-    println!("方法2: {}", word);
-
-    // ✅ 方法3: Stringの部分スライス
-    let word = first_word(&my_string[0..5]);
-    println!("方法3: {}", word);
-
-    let my_string_literal = "hello world";
-
-    // ✅ 方法4: 文字列リテラル（それ自体が&str）
-    let word = first_word(my_string_literal);
-    println!("方法4: {}", word);
-
-    // ✅ 方法5: 文字列リテラルのスライス
-    let word = first_word(&my_string_literal[..]);
-    println!("方法5: {}", word);
 }
