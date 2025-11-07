@@ -1,43 +1,54 @@
 fn main() {
-    println!("=== 配列スライスの例 ===\n");
+    println!("=== Python vs Rust の比較 ===\n");
 
+    // Rust の配列（固定長）
+    println!("--- Rust の配列（固定長）---");
     let a = [1, 2, 3, 4, 5];
+    println!("配列 a: {:?}", a);
 
-    println!("元の配列: {:?}", a);
-    println!("インデックス: 0  1  2  3  4\n");
-
-    // スライスを作る
+    // スライス（参照）
     let slice = &a[1..3];
+    println!("スライス &a[1..3]: {:?}", slice);
+    println!("これは参照（ポインタ）です\n");
 
-    println!("slice = &a[1..3]");
-    println!("結果: {:?}", slice);
-    println!("型: &[i32]");
-    println!("内容: インデックス1と2の要素 [2, 3]\n");
+    // Rust の Vec（Pythonのlistに近い）
+    println!("--- Rust の Vec（Pythonのlistに近い）---");
+    let mut v = vec![1, 2, 3, 4, 5];
+    println!("Vec v: {:?}", v);
 
-    // 様々なスライス
-    let first_three = &a[0..3];
-    println!("first_three = &a[0..3]: {:?}", first_three);
+    v.push(6);  // 追加できる
+    println!("v.push(6) した後: {:?}", v);
 
-    let last_two = &a[3..5];
-    println!("last_two = &a[3..5]: {:?}", last_two);
+    v[0] = 999;  // 変更できる
+    println!("v[0] = 999 した後: {:?}\n", v);
 
-    let middle = &a[1..4];
-    println!("middle = &a[1..4]: {:?}", middle);
+    // Vecのスライス
+    println!("--- Vecのスライスも作れる ---");
+    let vec_slice = &v[1..3];
+    println!("&v[1..3]: {:?}", vec_slice);
+    println!("これも参照です");
 
-    // 省略形
-    println!("\n--- 省略形 ---");
-    let from_start = &a[..3];
-    println!("&a[..3]: {:?}", from_start);
+    // メモリの違い
+    println!("\n=== メモリの違い ===");
+    println!("Python:");
+    println!("  a[1:3] → 新しいリストをコピー");
+    println!("\nRust:");
+    println!("  &a[1..3] → 元の配列を指すポインタ（コピーなし）");
 
-    let to_end = &a[2..];
-    println!("&a[2..]: {:?}", to_end);
+    // ベクタの所有権（重要！）
+    println!("\n=== ベクタはムーブする（コピーしない）===");
+    let v_orig = vec![1, 2, 3];
+    let v_moved = v_orig;  // ムーブ！
 
-    let all = &a[..];
-    println!("&a[..]: {:?}", all);
+    // println!("{:?}", v_orig);  // ❌ エラー！
+    println!("v_moved: {:?}", v_moved);
+    println!("v_origはムーブされて使えない");
 
-    // スライスの操作
-    println!("\n--- スライスの操作 ---");
-    println!("slice の長さ: {}", slice.len());
-    println!("slice の最初の要素: {}", slice[0]);
-    println!("slice の2番目の要素: {}", slice[1]);
+    // コピーしたい場合
+    println!("\n--- 明示的にclone()すればコピーできる ---");
+    let v1 = vec![10, 20, 30];
+    let v2 = v1.clone();  // 明示的にコピー
+
+    println!("v1: {:?}", v1);  // ✅ OK
+    println!("v2: {:?}", v2);  // ✅ OK
 }
