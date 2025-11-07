@@ -1,42 +1,43 @@
 fn main() {
-    // String型
-    let my_string = String::from("hello world");
+    println!("=== 配列スライスの例 ===\n");
 
-    // 型を確認する小技
-    // my_stringの型は？
-    let _type_check: String = my_string.clone();
-    // ↑ String型だと確認できる
+    let a = [1, 2, 3, 4, 5];
 
-    // 文字列リテラルの型
-    let my_literal = "hello world";
+    println!("元の配列: {:?}", a);
+    println!("インデックス: 0  1  2  3  4\n");
 
-    // 型を確認
-    let _type_check: &str = my_literal;
-    // ↑ &str型だと確認できる
+    // スライスを作る
+    let slice = &a[1..3];
 
-    println!("my_string の型: String");
-    println!("my_literal の型: &str");
+    println!("slice = &a[1..3]");
+    println!("結果: {:?}", slice);
+    println!("型: &[i32]");
+    println!("内容: インデックス1と2の要素 [2, 3]\n");
 
-    // だから...
-    println!("\n--- 関数呼び出し ---");
+    // 様々なスライス
+    let first_three = &a[0..3];
+    println!("first_three = &a[0..3]: {:?}", first_three);
 
-    // Stringは&を付ける
-    first_word(&my_string);
-    println!("✅ first_word(&my_string) - &を付けた");
+    let last_two = &a[3..5];
+    println!("last_two = &a[3..5]: {:?}", last_two);
 
-    // &strはそのまま
-    first_word(my_literal);
-    println!("✅ first_word(my_literal) - そのまま");
-}
+    let middle = &a[1..4];
+    println!("middle = &a[1..4]: {:?}", middle);
 
-fn first_word(s: &str) -> &str {
-    let bytes = s.as_bytes();
+    // 省略形
+    println!("\n--- 省略形 ---");
+    let from_start = &a[..3];
+    println!("&a[..3]: {:?}", from_start);
 
-    for (i, &item) in bytes.iter().enumerate() {
-        if item == b' ' {
-            return &s[0..i];
-        }
-    }
+    let to_end = &a[2..];
+    println!("&a[2..]: {:?}", to_end);
 
-    &s[..]
+    let all = &a[..];
+    println!("&a[..]: {:?}", all);
+
+    // スライスの操作
+    println!("\n--- スライスの操作 ---");
+    println!("slice の長さ: {}", slice.len());
+    println!("slice の最初の要素: {}", slice[0]);
+    println!("slice の2番目の要素: {}", slice[1]);
 }
