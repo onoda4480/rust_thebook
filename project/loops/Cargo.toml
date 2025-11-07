@@ -18,4 +18,8 @@ path = "src/main3.rs"
 [[bin]]
 name = "main4"
 path = "src/main4.rs"
+
+[[bin]]
+name = "main5"
+path = "src/main5.rs"
 [dependencies]
