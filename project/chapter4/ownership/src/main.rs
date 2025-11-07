@@ -1,8 +1,7 @@
 #![allow(unused)]
 fn main() {
-let mut s = String::from("hello");
+    let s1 = String::from("hello");
+    let s2 = s1;
 
-s.push_str(", world!"); // push_str()関数は、リテラルをStringに付け加える
-
-println!("{}", s); // これは`hello, world!`と出力する
+    println!("{}, world!", s1);
 }
