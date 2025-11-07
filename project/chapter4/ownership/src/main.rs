@@ -1,9 +1,9 @@
 fn main() {
     let mut s = String::from("hello");
 
-    let r1 = &mut s;
-    println!("{}", r1);  // r1の最後の使用
+    let r1 = &s; // 問題なし
+    let r2 = &s; // 問題なし
+    let r3 = &mut s; // 大問題！
 
-    let r2 = &mut s;  // r1はもう使われないのでOK
-    println!("{}", r2);
+    println!("{}, {}, {}", r1, r2, r3);  // 全部使う
 }
