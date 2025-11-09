@@ -15,4 +15,5 @@ let mut user1 = User {
 };
 
 user1.email = String::from("anotheremail@example.com");
+println!("User email: {}", user1.email);
 }
