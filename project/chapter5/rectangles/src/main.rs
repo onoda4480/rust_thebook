@@ -5,9 +5,18 @@ struct Rectangle {
 }
 
 impl Rectangle {
+    fn square(size: u32) -> Rectangle {
+        Rectangle { width: size, height: size }
+    }
+}
+
+impl Rectangle {
     fn area(&self) -> u32 {
         self.width * self.height
     }
+}
+
+impl Rectangle {
     fn can_hold(&self, other: &Rectangle) -> bool {
         self.width > other.width && self.height > other.height
     }
@@ -21,4 +30,8 @@ fn main() {
     // rect1にrect2ははまり込む？
     println!("Can rect1 hold rect2? {}", rect1.can_hold(&rect2));
     println!("Can rect1 hold rect3? {}", rect1.can_hold(&rect3));
+
+    println!("The area of rect1 is {} square pixels.", rect1.area());
+    let square = Rectangle::square(20);
+    println!("The area of square is {} square pixels.", square.area());
 }
