@@ -634,6 +634,272 @@ println!("{}", user1_ref.username);  // ✅ OK
 
 ---
 
+## Q12: struct と impl は Python の class とどう違う？
+
+**質問:** Rust の `struct` は Python でいう class（データ部分）で、`impl` は class（関数をまとめている）って考え方で正しい？
+
+**回答:** 少し違います。**`struct + impl = Python の class 全体`** です
+
+### 正しい対応関係
+
+```
+Rust:  struct + impl
+Python: class
+
+Rustでは分かれているが、Pythonでは一緒
+```
+
+---
+
+### Rust（分離）
+
+```rust
+// データ構造の定義
+struct Rectangle {
+    width: u32,
+    height: u32,
+}
+
+// メソッドの定義
+impl Rectangle {
+    fn area(&self) -> u32 {
+        self.width * self.height
+    }
+
+    fn new(width: u32, height: u32) -> Self {
+        Rectangle { width, height }
+    }
+}
+```
+
+**特徴:**
+- `struct` = データ構造だけ
+- `impl` = メソッドだけ
+- **分離している**
+
+---
+
+### Python（一体化）
+
+```python
+# データ構造とメソッドが一緒
+class Rectangle:
+    def __init__(self, width, height):
+        self.width = width    # データ
+        self.height = height  # データ
+
+    def area(self):           # メソッド
+        return self.width * self.height
+```
+
+**特徴:**
+- `class` = データ + メソッド
+- **一緒になっている**
+
+---
+
+### 対応表
+
+| Rust | Python | 説明 |
+|---|---|---|
+| `struct Rectangle { ... }` | `__init__` 部分 | データ構造 |
+| `impl Rectangle { ... }` | メソッド部分 | 機能 |
+| **struct + impl** | **class 全体** | 完全な型 |
+
+---
+
+### なぜRustは分けているのか？
+
+#### 1. トレイト実装を柔軟にするため
+
+```rust
+struct Point {
+    x: i32,
+    y: i32,
+}
+
+// 通常のメソッド
+impl Point {
+    fn new(x: i32, y: i32) -> Self {
+        Point { x, y }
+    }
+}
+
+// Display トレイト実装
+impl fmt::Display for Point {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "({}, {})", self.x, self.y)
+    }
+}
+```
+
+#### 2. コードの整理
+
+```rust
+// 計算メソッド
+impl Rectangle {
+    fn area(&self) -> u32 { }
+    fn perimeter(&self) -> u32 { }
+}
+
+// 比較メソッド
+impl Rectangle {
+    fn can_hold(&self, other: &Rectangle) -> bool { }
+}
+```
+
+機能ごとに `impl` ブロックを分けられる
+
+---
+
+### まとめ
+
+```
+❌ 間違い:
+struct = Python の class（データ部分）
+impl = Python の class（関数部分）
+
+✅ 正しい:
+struct = Python の class のデータ定義部分
+impl = Python の class のメソッド定義部分
+struct + impl = Python の class 全体
+```
+
+---
+
+## Q13: DDD との関係
+
+**質問:** DDD だとよく Python でも構造体だけ別で実装されていると思いますが、その考え方と似ている？Rust は DDD との相性も良さそうですね。
+
+**回答:** **その通りです！** Rust は **DDD と非常に相性が良い**言語です
+
+### Python の DDD パターン
+
+```python
+# データクラス（構造体的）
+@dataclass
+class User:
+    username: str
+    email: str
+    active: bool
+    sign_in_count: int
+
+# ビジネスロジック（別ファイル）
+class UserService:
+    @staticmethod
+    def create_user(username: str, email: str) -> User:
+        return User(
+            username=username,
+            email=email,
+            active=True,
+            sign_in_count=1
+        )
+```
+
+**特徴:** データ（`@dataclass`）とロジック（`Service`）が**分離**
+
+---
+
+### Rust は言語レベルでこれを強制
+
+```rust
+// データ構造（値オブジェクト/エンティティ）
+struct User {
+    username: String,
+    email: String,
+    active: bool,
+    sign_in_count: u64,
+}
+
+// ドメインロジック
+impl User {
+    fn create(username: String, email: String) -> Self {
+        User {
+            username,
+            email,
+            active: true,
+            sign_in_count: 1,
+        }
+    }
+
+    fn validate_email(&self) -> bool {
+        self.email.contains('@')
+    }
+}
+```
+
+**Rust は `struct` と `impl` を分けることで、DDD の考え方を言語仕様として持っている**
+
+---
+
+### DDD パターンとの対応
+
+#### 1. 値オブジェクト（Value Object）
+
+```rust
+// Rust
+#[derive(Debug, Clone, PartialEq, Eq)]
+struct Email(String);
+
+impl Email {
+    fn new(email: String) -> Result<Self, String> {
+        if email.contains('@') {
+            Ok(Email(email))
+        } else {
+            Err("Invalid email".to_string())
+        }
+    }
+}
+```
+
+#### 2. エンティティ（Entity）
+
+```rust
+// Rust
+struct Order {
+    id: OrderId,
+    items: Vec<OrderItem>,
+    status: OrderStatus,
+}
+
+impl Order {
+    fn add_item(&mut self, item: OrderItem) -> Result<(), OrderError> {
+        if self.status != OrderStatus::Draft {
+            return Err(OrderError::CannotModifyCompletedOrder);
+        }
+        self.items.push(item);
+        Ok(())
+    }
+}
+```
+
+---
+
+### Rust が DDD に有利な点
+
+| 概念 | Python (DDD) | Rust |
+|---|---|---|
+| **データとロジックの分離** | `@dataclass` + `Service` | `struct` + `impl` |
+| **不変性** | 意識的に実装 | デフォルト |
+| **型安全性** | 型ヒント（実行時） | コンパイル時強制 |
+| **newtype パターン** | 手動実装 | タプル構造体で簡単 |
+| **状態遷移** | 手動チェック | 型で表現 |
+
+---
+
+### まとめ
+
+```
+✅ Rustは型システムでDDDの概念を自然に表現できる
+✅ 不変性、型安全性がDDDのパターンを強制
+✅ コンパイル時にビジネスルール違反を検出
+✅ Pythonより厳格で安全なドメインモデルを作れる
+```
+
+**Rust は「コンパイラが DDD のレビュアー」になってくれる！**
+
+---
+
 ## 重要な概念のまとめ
 
 ### struct と impl の関係
