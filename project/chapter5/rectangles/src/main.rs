@@ -11,17 +11,10 @@ impl Rectangle {
 }
 
 fn main() {
-    let rect1 = Rectangle {
-        width: 30,
-        height: 50,
-    };
-    // rect1は{}です
-    println!("rect1 is {:#?}", rect1);
+    let rect1 = Rectangle { width: 30, height: 50 };
 
     println!(
-        // 長方形の面積は、{}平方ピクセルです
         "The area of the rectangle is {} square pixels.",
-        area(&rect1)
+        rect1.area()
     );
 }
-
