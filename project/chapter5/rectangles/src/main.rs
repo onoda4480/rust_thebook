@@ -1,3 +1,4 @@
+#[derive(Debug)]
 struct Rectangle {
     width: u32,
     height: u32,
@@ -8,6 +9,8 @@ fn main() {
         width: 30,
         height: 50,
     };
+    // rect1は{}です
+    println!("rect1 is {:?}", rect1);
 
     println!(
         // 長方形の面積は、{}平方ピクセルです
