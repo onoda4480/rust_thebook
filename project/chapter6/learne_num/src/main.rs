@@ -24,5 +24,6 @@ fn value_in_cents(coin: Coin) -> u32 {
         },
     }
 }
-value_in_cents(Coin::Quarter(UsState::Alaska));
+let num = value_in_cents(Coin::Quarter(UsState::Alaska));
+println!("The value of the coin is {} cents.", num);
 }
