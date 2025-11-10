@@ -1,11 +1,15 @@
 #![allow(unused)]
 fn main() {
-enum IpAddr {
-    V4(u8, u8, u8, u8),
-    V6(String),
+struct Ipv4Addr {
+    // 省略
 }
 
-let home = IpAddr::V4(127, 0, 0, 1);
+struct Ipv6Addr {
+    // 省略
+}
 
-let loopback = IpAddr::V6(String::from("::1"));
+enum IpAddr {
+    V4(Ipv4Addr),
+    V6(Ipv6Addr),
+}
 }
