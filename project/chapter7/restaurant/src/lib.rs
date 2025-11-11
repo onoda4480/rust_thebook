@@ -10,4 +10,5 @@ pub fn eat_at_restaurant() {
     add_to_waitlist();
     add_to_waitlist();
     add_to_waitlist();
+    // ↑ではどこでadd_to_waitlistが定義されたのかが不明瞭です。
 }
