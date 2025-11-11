@@ -1,14 +1,17 @@
-mod front_of_house {
-    pub mod hosting {
-        pub fn add_to_waitlist() {}
-    }
+#![allow(unused)]
+fn main() {
+use std::fmt;
+use std::io;
+
+fn function1() -> fmt::Result {
+    // --snip--
+    // （略）
+    Ok(())
 }
 
-use crate::front_of_house::hosting::add_to_waitlist;
-
-pub fn eat_at_restaurant() {
-    add_to_waitlist();
-    add_to_waitlist();
-    add_to_waitlist();
-    // ↑ではどこでadd_to_waitlistが定義されたのかが不明瞭です。
+fn function2() -> io::Result<()> {
+    // --snip--
+    // （略）
+    Ok(())
+}
 }
