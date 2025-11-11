@@ -1,11 +1,10 @@
 use rand::Rng;
 // --snip--
 // （略）
-use std::cmp::Ordering;
-use std::io;
+use std::{cmp::Ordering, io};
 // --snip--
 // （略）
-// ↑一々 std内のクレートを指定するのが面倒
+
 fn main() {
     println!("Guess the number!");
 
@@ -20,6 +19,8 @@ fn main() {
     io::stdin()
         .read_line(&mut guess)
         .expect("Failed to read line");
+
+    let guess: u32 = guess.trim().parse().expect("Please type a number!");
 
     println!("You guessed: {}", guess);
 
