@@ -1,7 +1,7 @@
 #![allow(unused)]
 fn main() {
-let mut s = String::from("lo");
-s.push('l');
-println!("{}", s);
-//pushは1文字を引数としてとりStringに追加
+let s1 = String::from("Hello, ");
+let s2 = String::from("world!");
+let s3 = s1 + &s2; // s1はムーブされ、もう使用できないことに注意
+println!("{}", s3);
 }
