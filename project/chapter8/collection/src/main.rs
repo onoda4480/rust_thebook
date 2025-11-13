@@ -1,15 +1,12 @@
 fn main() {
     let v = vec![1, 2, 3, 4, 5];
 
-    //&と[]を使ってベクタの要素にアクセスする方法
-    let third: &i32 = &v[2];
-    println!("The third element is {}", third);
+    //要素外参照のためのパニック！
+    let does_not_exist = &v[100];
+    println!("{:?}", does_not_exist);
     
-    //getメソッドを使ってベクタの要素にアクセスする方法
-    match v.get(2) {
-        //                      "3つ目の要素は{}です"
-        Some(third) => println!("The third element is {}", third),
-        //               "3つ目の要素はありません。"
-        None => println!("There is no third element."),
-    }
+    //Optionでの安全な参照
+    //Noneが返る
+    let does_not_exist = v.get(100);
+    println!("{:?}", does_not_exist);
 }
