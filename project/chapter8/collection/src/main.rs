@@ -1,3 +1,5 @@
 fn main() {
-    println!("Hello, world!");
+    let v:vec<i32> = Vec:new();
+    //新しい空のベクタを生成してi32型の値を保持する
+    //空のベクタの際には型注釈が必要
 }
