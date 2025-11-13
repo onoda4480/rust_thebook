@@ -1,12 +1,11 @@
 fn main() {
-    let v = vec![1, 2, 3, 4, 5];
+    let mut v = vec![1, 2, 3, 4, 5];
 
-    //要素外参照のためのパニック！
-    let does_not_exist = &v[100];
-    println!("{:?}", does_not_exist);
-    
-    //Optionでの安全な参照
-    //Noneが返る
-    let does_not_exist = v.get(100);
-    println!("{:?}", does_not_exist);
+    let first = &v[0];
+
+    v.push(6);
+    // エラー: 可変参照と不変参照の同時使用
+    //解放されたメモリにアクセスしようとしているため、
+    // コンパイルエラーになる。
+    println!("The first element is: {}", first);
 }
