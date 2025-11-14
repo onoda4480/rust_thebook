@@ -1,13 +1,20 @@
 #![allow(unused)]
 fn main() {
 use std::collections::HashMap;
-//タプルのベクタに対してcollectメソッドを呼び出すことで、
-// ハッシュマップを生成できる:
-let teams  = vec![String::from("Blue"), String::from("Yellow")];
-let initial_scores = vec![10, 50];
+let field_name = String::from("Favorite color");
+let field_value = String::from("Blue");
 
-let scores: HashMap<_, _> = teams.iter().zip(initial_scores.iter()).collect();
-//ベクタのように、ハッシュマップは均質です: 
-// キーは全て同じ型でなければならず、 
-// 値も全て同じ型でなければなりません。
+let mut map = HashMap::new();
+map.insert(field_name, field_value);
+// field_name and field_value are invalid at this point, try using them and
+// see what compiler error you get!
+// field_nameとfield_valueはこの時点で無効になる。試しに使ってみて
+// どんなコンパイルエラーが出るか確認してみて！
+//以下はアクセス方法が違うのでエラー
+println!("{}", map["Favorite color"]);
+println!("{}", map["Blue"]);
+
+//これはmapに所有権が移動しているのでエラー
+println!("{}", field_name);
+println!("{}", field_value);
 }
