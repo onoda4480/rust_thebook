@@ -5,9 +5,8 @@ use std::collections::HashMap;
 let mut scores = HashMap::new();
 
 scores.insert(String::from("Blue"), 10);
-scores.insert(String::from("Yellow"), 50);
+scores.insert(String::from("Blue"), 25);
 
-for (key, value) in &scores {
-    println!("{}: {}", key, value);
-}
+println!("{:?}", scores);
+//10->25に更新される
 }
