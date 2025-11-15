@@ -1,5 +1,5 @@
-fn main() {
-    let v = vec![1, 2, 3];
+use std::fs::File;
 
-    v[99];
+fn main() {
+    let f: u32 = File::open("hello.txt");
 }
