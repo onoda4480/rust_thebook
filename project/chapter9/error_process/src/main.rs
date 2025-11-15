@@ -1,12 +1,10 @@
 use std::io;
 use std::io::Read;
 use std::fs::File;
-fn main(){
-fn read_username_from_file() -> Result<String, io::Error> {
-    let mut s = String::new();
+use std::fs::File;
 
-    File::open("hello.txt")?.read_to_string(&mut s)?;
-
-    Ok(s)
-}
+fn main() {
+    let f = File::open("hello.txt")?;
+    //mainは返却値が()のためだめ
+    //?演算子は戻り値にResultを持つ関数でしか使用できません。
 }
