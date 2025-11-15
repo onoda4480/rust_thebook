@@ -1,10 +1,23 @@
-use std::io;
-use std::io::Read;
-use std::fs::File;
-use std::fs::File;
-
+#![allow(unused)]
 fn main() {
-    let f = File::open("hello.txt")?;
-    //mainは返却値が()のためだめ
-    //?演算子は戻り値にResultを持つ関数でしか使用できません。
+pub struct Guess {
+    value: u32,
+}
+
+impl Guess {
+    pub fn new(value: u32) -> Guess {
+        if value < 1 || value > 100 {
+            // 予想の値は1から100の範囲でなければなりませんが、{}でした
+            panic!("Guess value must be between 1 and 100, got {}.", value);
+        }
+
+        Guess {
+            value
+        }
+    }
+
+    pub fn value(&self) -> u32 {
+        self.value
+    }
+}
 }
