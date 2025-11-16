@@ -40,3 +40,32 @@ fn returns_summarizable() -> impl Summary {
 }//具体的な型が何かを言うことなく、
 //returns_summarizable関数は
 //Summaryトレイトを実装している何らかの型を返すのだ、と指定することができる
+
+//以下はエラーになる
+//NewsArticleとTweetは異なる型のため
+//impl Traitは一種類の型を返す場合にのみ使える。
+
+// fn returns_summarizable(switch: bool) -> impl Summary {
+//     if switch {
+//         NewsArticle {
+//             headline: String::from(
+//                 "Penguins win the Stanley Cup Championship!",
+//             ),
+//             location: String::from("Pittsburgh, PA, USA"),
+//             author: String::from("Iceburgh"),
+//             content: String::from(
+//                 "The Pittsburgh Penguins once again are the best \
+//                  hockey team in the NHL.",
+//             ),
+//         }
+//     } else {
+//         Tweet {
+//             username: String::from("horse_ebooks"),
+//             content: String::from(
+//                 "of course, as you probably already know, people",
+//             ),
+//             reply: false,
+//             retweet: false,
+//         }
+//     }
+// }
