@@ -40,3 +40,20 @@ where
     T: Display + Clone,
     U: Clone + Debug,
 {}//where句を使うと、関数シグネチャがすっきりする
+
+//ブランケット実装
+//あるトレイトが他のトレイトを実装している型すべてに自動的に実装される場合
+//例えば、以下のような実装があるとする
+impl<T: Display> ToString for T {
+    //...
+}
+//この場合、Displayを実装している型すべてが自動的にToStringも実装することになる
+//これをブランケット実装と呼ぶ
+//例えば、以下のような実装があるとする
+impl<T: Summary> Notify for T {
+    fn notify(&self) {
+        println!("Breaking news! {}", self.summarize());
+    }
+}
+//この場合、Summaryを実装している型すべてが自動的にNotifyも実装することになる
+//これもブランケット実装の例である 
