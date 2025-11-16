@@ -1,15 +1,17 @@
-fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
-//copyトレイト境界を使って、
-//largest関数がコピー可能な型を受け入れるようにする
-    let mut largest = list[0];
-
-    for &item in list {
+fn largest<T: PartialOrd>(list: &[T]) -> &T {
+//        ^^^^^^^^^^^^^^^              ^^
+//        Copy 不要！                  参照を返す
+    let mut largest = &list[0];  // 参照
+    //                ^
+    
+    for item in list {  // item は &T（参照）
+//      ^^^^            &item ではない
         if item > largest {
             largest = item;
         }
     }
-
-    largest
+    
+    largest  // 参照を返す
 }
 
 fn main() {
