@@ -1,14 +1,15 @@
-enum Option_i32 {
-    Some(i32),
-    None,
-}
-
-enum Option_f64 {
-    Some(f64),
-    None,
-}
+use chapter10::{self, Summary, Tweet};
 
 fn main() {
-    let integer = Option_i32::Some(5);
-    let float = Option_f64::Some(5.0);
+    let tweet = Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from(
+            // もちろん、ご存知かもしれませんがね、みなさん
+            "of course, as you probably already know, people",
+        ),
+        reply: false,
+        retweet: false,
+    };
+
+    println!("1 new tweet: {}", tweet.summarize());
 }
