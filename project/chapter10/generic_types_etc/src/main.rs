@@ -1,13 +1,14 @@
-fn main() {
-    let string1 = String::from("abcd");
-    let string2 = "xyz";
-
-    let result = longest(string1.as_str(), string2);
-    println!("The longest string is {}", result);
+struct ImportantExcerpt<'a> {
+    part: &'a str,
 }
 
-fn longest<'a>(x: &str, y: &str) -> &'a str {
-    // 本当に長い文字列
-    let result = String::from("really long string");
-    result.as_str()
+fn main() {
+    // 僕をイシュマエルとお呼び。何年か前・・・
+    let novel = String::from("Call me Ishmael. Some years ago...");
+    //                                                  "'.'が見つかりませんでした"
+    let first_sentence = novel.split('.').next().expect("Could not find a '.'");
+    let i = ImportantExcerpt {
+        part: first_sentence,
+    };
+    println!("Excerpt: {}", i.part);
 }
