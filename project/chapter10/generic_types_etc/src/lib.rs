@@ -1,5 +1,3 @@
-#![allow(unused)]
-fn main() {
 pub trait Summary {
     fn summarize(&self) -> String {
         // "（もっと読む）"
@@ -31,5 +29,4 @@ impl Summary for Tweet {
     fn summarize(&self) -> String {
         format!("{}: {}", self.username, self.content)
     }
-}
 }
