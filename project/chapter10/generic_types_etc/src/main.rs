@@ -1,20 +1,24 @@
-use generic_types_etc::{Summary, NewsArticle, Tweet};
+fn largest<T: PartialOrd>(list: &[T]) -> T {
+    let mut largest = list[0];
 
-fn main() {
-        let tweet = Tweet {
-        username: String::from("horse_ebooks"),
-        content: String::from(
-            "of course, as you probably already know, people",
-        ),
-        reply: false,
-        retweet: false,
-    };
+    for &item in list {
+        if item > largest {
+            largest = item;
+        }
+    }
 
-    println!("1 new tweet: {}", tweet.summarize());
-
+    largest
 }
-//✅ デフォルト実装 → impl で書かなくていい
-//✅ tweet.summarize() が使える理由:
-//    - tweet は Tweet のインスタンス
-//    - Tweet は Summary を実装している
-//    - だから Summary のメソッドが使える
+//largest関数をジェネリックにすると、 list引数がCopyトレイトを実装しない型を含む可能性も出てくる。
+//結果として、 list[0]から値をlargestにムーブできず、このエラーに陥いる。
+fn main() {
+    let number_list = vec![34, 50, 25, 100, 65];
+
+    let result = largest(&number_list);
+    println!("The largest number is {}", result);
+
+    let char_list = vec!['y', 'm', 'a', 'q'];
+
+    let result = largest(&char_list);
+    println!("The largest char is {}", result);
+}
