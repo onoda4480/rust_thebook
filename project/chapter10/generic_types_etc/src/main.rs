@@ -1,4 +1,6 @@
-fn largest<T: PartialOrd>(list: &[T]) -> T {
+fn largest<T: PartialOrd + Copy>(list: &[T]) -> T {
+//copyトレイト境界を使って、
+//largest関数がコピー可能な型を受け入れるようにする
     let mut largest = list[0];
 
     for &item in list {
@@ -9,8 +11,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> T {
 
     largest
 }
-//largest関数をジェネリックにすると、 list引数がCopyトレイトを実装しない型を含む可能性も出てくる。
-//結果として、 list[0]から値をlargestにムーブできず、このエラーに陥いる。
+
 fn main() {
     let number_list = vec![34, 50, 25, 100, 65];
 
