@@ -29,3 +29,14 @@ pub fn notify(item: &(impl Summary + Display)) {
 pub fn notify<T: Summary + Display>(item: &T) {
     println!("Breaking news! {}", item.summarize());
 }
+
+//where句を使ったトレイト境界
+//複数のトレイト境界がある場合、where句を使うと見やすくなる
+fn some_function<T: Display + Clone, U: Clone + Debug>(t: &T, u: &U) -> i32 {}
+
+//上記は以下と同じ
+fn some_function<T, U>(t: &T, u: &U) -> i32
+where
+    T: Display + Clone,
+    U: Clone + Debug,
+{}//where句を使うと、関数シグネチャがすっきりする
