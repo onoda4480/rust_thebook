@@ -1,9 +1,5 @@
 pub trait Summary {
-    fn summarize_author(&self) -> String;
-    fn summarize(&self) -> String {
-        // "（{}さんの文章をもっと読む）"
-        format!("(Read more from {}...)", self.summarize_author())
-    }
+    fn summarize(&self) -> String;
 }
 
 pub struct NewsArticle {
@@ -13,7 +9,11 @@ pub struct NewsArticle {
     pub content: String,
 }
 
-//impl Summary for NewsArticle {}
+impl Summary for NewsArticle {
+    fn summarize(&self) -> String {
+        format!("{}, by {} ({})", self.headline, self.author, self.location)
+    }
+}
 
 pub struct Tweet {
     pub username: String,
@@ -23,7 +23,13 @@ pub struct Tweet {
 }
 
 impl Summary for Tweet {
-    fn summarize_author(&self) -> String {
-        format!("@{}", self.username)
+    fn summarize(&self) -> String {
+        format!("{}: {}", self.username, self.content)
     }
 }
+
+pub fn notify(item: &impl Summary) {
+    println!("Breaking news! {}", item.summarize());
+}
+//notifyの中身では、summarizeのような、
+//Summaryトレイトに由来するitemのあらゆるメソッドを呼び出すことができる
