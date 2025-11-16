@@ -28,8 +28,15 @@ impl Summary for Tweet {
     }
 }
 
-pub fn notify(item: &impl Summary) {
-    println!("Breaking news! {}", item.summarize());
-}
-//notifyの中身では、summarizeのような、
-//Summaryトレイトに由来するitemのあらゆるメソッドを呼び出すことができる
+fn returns_summarizable() -> impl Summary {
+    Tweet {
+        username: String::from("horse_ebooks"),
+        content: String::from(
+            "of course, as you probably already know, people",
+        ),
+        reply: false,
+        retweet: false,
+    }
+}//具体的な型が何かを言うことなく、
+//returns_summarizable関数は
+//Summaryトレイトを実装している何らかの型を返すのだ、と指定することができる
