@@ -20,3 +20,12 @@ pub fn notify<T: Summary>(item1: &T, item2: &T) {
     //
     println!("Breaking news! {}", item2.summarize());
 }
+
+//複数のトレイト境界
+pub fn notify(item: &(impl Summary + Display)) {
+    println!("Breaking news! {}", item.summarize());
+}
+//上記は以下と同じ
+pub fn notify<T: Summary + Display>(item: &T) {
+    println!("Breaking news! {}", item.summarize());
+}
