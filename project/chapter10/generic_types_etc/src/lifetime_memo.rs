@@ -41,3 +41,26 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 //依存するのかをコンパイラが判断できない
 //ので、ライフタイム注釈を使って明示的に
 //示す必要がある
+
+//メソッド定義におけるライフタイム注釈
+//唯一の引数がselfへの参照で戻り値がi32という何かへの参照ではないlevelというメソッドを使用します:
+impl<'a> ImportantExcerpt<'a> {
+    fn level(&self) -> i32 {
+        3
+    }
+}
+//この場合、ライフタイム省略規則の2つ目が
+//適用されるので、&selfのライフタイムが
+//戻り値に適用される
+//しかし、戻り値が参照ではないので、
+//ライフタイム注釈は必要ない
+
+//3番目のライフタイム省略規則が適用される例はこちらです:
+impl<'a> ImportantExcerpt<'a> {
+    fn announce_and_return_part(&self, announcement: &str) -> &str {
+        //       "お知らせします: {}"
+        println!("Attention please: {}", announcement);
+        self.part
+    }
+}
+//「メソッドで複数の参照があっても、戻り値は普通 self から返すから、ライフタイムは &self と同じ」
