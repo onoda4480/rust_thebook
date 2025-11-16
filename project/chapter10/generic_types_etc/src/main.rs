@@ -1,20 +1,20 @@
 use generic_types_etc::{Summary, NewsArticle, Tweet};
 
 fn main() {
-    let article = NewsArticle {
-        // ペンギンチームがスタンレーカップチャンピオンシップを勝ち取る！
-        headline: String::from("Penguins win the Stanley Cup Championship!"),
-        // アメリカ、ペンシルベニア州、ピッツバーグ
-        location: String::from("Pittsburgh, PA, USA"),
-        // アイスバーグ
-        author: String::from("Iceburgh"),
-        // ピッツバーグ・ペンギンが再度NHL(National Hockey League)で最強のホッケーチームになった
+        let tweet = Tweet {
+        username: String::from("horse_ebooks"),
         content: String::from(
-            "The Pittsburgh Penguins once again are the best \
-             hockey team in the NHL.",
+            "of course, as you probably already know, people",
         ),
+        reply: false,
+        retweet: false,
     };
 
-    println!("New article available! {}", article.summarize());
+    println!("1 new tweet: {}", tweet.summarize());
 
 }
+//✅ デフォルト実装 → impl で書かなくていい
+//✅ tweet.summarize() が使える理由:
+//    - tweet は Tweet のインスタンス
+//    - Tweet は Summary を実装している
+//    - だから Summary のメソッドが使える
