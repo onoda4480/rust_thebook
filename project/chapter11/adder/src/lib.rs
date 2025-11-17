@@ -1,19 +1,25 @@
+fn prints_and_returns_10(a: i32) -> i32 {
+    //{}という値を得た
+    println!("I got the value {}", a);
+    10
+}
+
 #[cfg(test)]
 mod tests {
+    use super::*;
+
     #[test]
-    fn it_works() -> Result<(), String> {
-        if 2 + 2 == 4 {
-            Ok(())
-        } else {
-            Err(String::from("two plus two does not equal four"))
-        }
+    fn this_test_will_pass() {
+        let value = prints_and_returns_10(4);
+        assert_eq!(10, value);
+    }
+
+    #[test]
+    fn this_test_will_fail() {
+        let value = prints_and_returns_10(8);
+        assert_eq!(5, value);
     }
 }
-//以下を書き直したもの
-//#[cfg(test)]
-// mod tests {
-//     #[test]
-//     fn it_works() {
-//         assert_eq!(2 + 2, 4);
-//     }
-// }
+
+//cargo test -- --nocaptureで実行すると
+//テスト成功時のprintln!の出力が見れる
