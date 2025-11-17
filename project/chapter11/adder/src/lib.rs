@@ -23,3 +23,5 @@ mod tests {
 
 //cargo test -- --nocaptureで実行すると
 //テスト成功時のprintln!の出力が見れる
+//cargo test -- --nocapture --test-threads=1だと並列数を1に制限することで
+//出力が混ざらないようにしている
