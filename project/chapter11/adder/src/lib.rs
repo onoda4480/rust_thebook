@@ -23,3 +23,5 @@ mod tests {
 }
 //cargo test one_hundredやcargo test add_two_and_twoのように
 //特定のテストだけを実行できる
+//cargo test addのようにでテスト関数名の一部を指定して実行することもできる
+//上記の場合はaddで始まるテスト関数がすべて実行される
