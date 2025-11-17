@@ -1,5 +1,6 @@
 pub fn greeting(name: &str) -> String {
-    format!("Hello {}!", name)
+    //format!("Hello {}!", name)
+    format!("Hello")
 }
 
 #[cfg(test)]
