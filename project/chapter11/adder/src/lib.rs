@@ -7,13 +7,15 @@ impl Guess {
         if value < 1 {
             panic!(
                 //予想値は1以上でなければなりませんが、{}でした。
-                "Guess value must be greater than or equal to 1, got {}.",
+                //"Guess value must be greater than or equal to 1, got {}.",
+                "Guess value must be less than or equal to 100, got {}.",
                 value
             );
         } else if value > 100 {
             panic!(
                 //予想値は100以下でなければなりませんが、{}でした。
-                "Guess value must be less than or equal to 100, got {}.",
+                //"Guess value must be less than or equal to 100, got {}.",
+                "Guess value must be greater than or equal to 1, got {}.",
                 value
             );
         }
