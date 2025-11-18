@@ -24,9 +24,19 @@ fn main() {
     println!("With text:\n{}", contents);
 }
 
-fn parse_config(args: &[String]) -> (&str, &str) {
-    let query = &args[1];
-    let filename = &args[2];
+struct Config {
+    query: String,
+    filename: String,
+}
 
-    (query, filename)
+fn parse_config(args: &[String]) -> Config {
+    let query = args[1].clone();
+    let filename = args[2].clone();
+    //以下から上のコードに変更
+    //参照のライフタイムを管理する必要がないから
+    //コードがシンプルになる
+    //let query = &args[1];
+    //let filename = &args[2];
+
+    Config { query, filename }
 }
