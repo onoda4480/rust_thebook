@@ -1,13 +1,19 @@
-#[test]
-fn it_works() {
-    assert_eq!(2 + 2, 4);
+pub fn add_two(a: i32) -> i32 {
+    internal_adder(a, 2)
 }
 
-#[test]
-#[ignore]
-fn expensive_test() {
-    // 実行に1時間かかるコード
-    // code that takes an hour to run
+fn internal_adder(a: i32, b: i32) -> i32 {
+    a + b
 }
 
-//cargo test -- --ignoredで無視されるテストのみ実行できる
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn internal() {
+        assert_eq!(4, internal_adder(2, 2));
+        //internal_adderは非公開関数なので、lib.rsの外からは呼び出せないが、
+        //同じモジュール内であればテスト可能
+    }
+}
