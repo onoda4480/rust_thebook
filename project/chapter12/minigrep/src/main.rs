@@ -5,7 +5,7 @@ use std::io::prelude::*;
 fn main() {
     let args: Vec<String> = env::args().collect();
 
-    let (query, filename) = parse_config(&args);
+    let config = Config::new(&args);
 
     // {}を探しています
     println!("Searching for {}", query);
@@ -29,14 +29,11 @@ struct Config {
     filename: String,
 }
 
-fn parse_config(args: &[String]) -> Config {
-    let query = args[1].clone();
-    let filename = args[2].clone();
-    //以下から上のコードに変更
-    //参照のライフタイムを管理する必要がないから
-    //コードがシンプルになる
-    //let query = &args[1];
-    //let filename = &args[2];
+impl Config {
+    fn new(args: &[String]) -> Config {
+        let query = args[1].clone();
+        let filename = args[2].clone();
 
-    Config { query, filename }
+        Config { query, filename }
+    }
 }
