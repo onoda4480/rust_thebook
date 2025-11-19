@@ -26,6 +26,9 @@ pub fn run (config: Config) -> Result<(), Box<dyn std::error::Error>> {
 
     let mut contents = String::new();
     f.read_to_string(&mut contents)?;
+    for line in search(&config.query, &contents) {
+        println!("{}", line);
+    }
 
     //println!("With text:\n{}", contents);
 
