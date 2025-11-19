@@ -8,12 +8,12 @@ fn main() {
     let config = Config::new(&args);
 
     // {}を探しています
-    println!("Searching for {}", query);
+    println!("Searching for {}", config.query);
     // {}というファイルの中
-    println!("In file {}", filename);
+    println!("In file {}", config.filename);
 
     // ファイルが見つかりませんでした
-    let mut f = File::open(filename).expect("file not found");
+    let mut f = File::open(config.filename).expect("file not found");
 
     let mut contents = String::new();
     f.read_to_string(&mut contents)
