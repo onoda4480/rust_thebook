@@ -1,3 +1,4 @@
+use std::env;
 use std::fs::File;
 use std::error::Error;
 use std::io::prelude::*;
@@ -10,15 +11,16 @@ pub struct Config {
 
 impl Config {
     pub fn new(args: &[String]) -> Result<Config, &'static str> {
-        //&'はライフタイム注釈
         if args.len() < 3 {
-        // 引数の数が足りません
             return Err("not enough arguments");
         }
+
         let query = args[1].clone();
         let filename = args[2].clone();
 
-        Ok(Config { query, filename })
+        let case_sensitive = env::var("CASE_INSENSITIVE").is_err();
+
+        Ok(Config { query, filename, case_sensitive })
     }
 }
 
