@@ -27,7 +27,29 @@ pub fn run (config: Config) -> Result<(), Box<dyn std::error::Error>> {
     let mut contents = String::new();
     f.read_to_string(&mut contents)?;
 
-    println!("With text:\n{}", contents);
+    //println!("With text:\n{}", contents);
 
     Ok(())
+}
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn one_result() {
+        let query = "duct";
+        // Rustは
+        // 安全で速く生産性も高い。
+        // 3つ選んで。
+        let contents = "\
+Rust:
+safe, fast, productive.
+Pick three.";
+
+        assert_eq!(
+            vec!["safe, fast, productive."],
+            search(query, contents)
+        );
+    }
 }
