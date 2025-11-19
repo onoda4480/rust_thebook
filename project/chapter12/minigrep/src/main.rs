@@ -1,3 +1,5 @@
+extern crate minigrep;
+use minigrep::Config;
 use std::env;
 use std::process;
 
@@ -15,7 +17,7 @@ fn main() {
     // {}というファイルの中
     println!("In file {}", config.filename);
 
-    if let Err(e) = run(config) {
+    if let Err(e) = minigrep::run(config) {
         println!("Application error: {}", e);
 
         process::exit(1);
