@@ -1,6 +1,7 @@
 use std::env;
 use std::process;
 use std::fs::File;
+use std::error::Error;
 use std::io::prelude::*;
 
 fn main() {
@@ -20,13 +21,15 @@ fn main() {
     run(config);
 }
 
-fn run (config: Config) {
-    let mut f = File::open(config.filename).expect("file not found");
+fn run (config: Config) -> Result<(), Box<dyn std::error::Error>> {
+    let mut f = File::open(config.filename)?;
 
     let mut contents = String::new();
-    f.read_to_string(&mut contents).expect("something went wrong reading the file");
+    f.read_to_string(&mut contents)?;
 
     println!("With text:\n{}", contents);
+
+    Ok(())
 }
 
 struct Config {
