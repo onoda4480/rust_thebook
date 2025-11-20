@@ -1,35 +1,25 @@
 use std::thread;
 use std::time::Duration;
 
-fn simulated_expensive_calculation(intensity: u32) -> u32 {
-    // ゆっくり計算します
-    println!("calculating slowly...");
-    thread::sleep(Duration::from_secs(2));
-    intensity
-}
-
-let expensive_closure = |num| {
-    println!("calculating slowly...");
-    thread::sleep(Duration::from_secs(2));
-    num
-};
-
 fn generate_workout(intensity: u32, random_number: u32) {
-    let expensive_result =
-        simulated_expensive_calculation(intensity);
+    let expensive_closure = |num| {
+        println!("calculating slowly...");
+        thread::sleep(Duration::from_secs(2));
+        num
+    };
 
     if intensity < 25 {
 
         println!(
             // 今日は{}回腕立て伏せをしてください！
             "Today, do {} pushups!",
-            expensive_result
+            expensive_closure(intensity)
         );
 
         println!(
             // 次に、{}回腹筋をしてください！
             "Next, do {} situps!",
-            expensive_result
+            expensive_closure(intensity)
         );
     } else {
         if random_number == 3 {
@@ -39,7 +29,7 @@ fn generate_workout(intensity: u32, random_number: u32) {
             println!(
                 // 今日は、{}分間走ってください！
                 "Today, run for {} minutes!",
-                expensive_result
+                expensive_closure(intensity)
             );
         }
     }
