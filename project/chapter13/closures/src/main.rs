@@ -1,11 +1,12 @@
 fn main() {
-    let x = 4;
+    let x = vec![1, 2, 3];
 
-    let equal_to_x = |z| z == x;
-    //fn equal_to_x(z: i32) -> bool { z == x }
-    //上記だとコンパイルエラーになる
+    let equal_to_x = move |z| z == x;
 
-    let y = 4;
+    // ここでは、xを使用できません: {:?}
+    println!("can't use x here: {:?}", x);
+    
+    let y = vec![1, 2, 3];
 
     assert!(equal_to_x(y));
 }
