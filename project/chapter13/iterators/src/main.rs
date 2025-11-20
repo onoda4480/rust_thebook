@@ -1,4 +1,3 @@
-#![allow(unused)]
 fn main() {
 let v1: Vec<i32> = vec![1, 2, 3];
 
