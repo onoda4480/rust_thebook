@@ -30,35 +30,28 @@ impl<T> Cacher<T>
 }
 
 fn generate_workout(intensity: u32, random_number: u32) {
-    //クロージャでは、fn関数のように引数の型や戻り値の型を注釈する必要はなし
-    let expensive_closure = |num: u32| -> u32  {
+    let mut expensive_result = Cacher::new(|num| {
         println!("calculating slowly...");
         thread::sleep(Duration::from_secs(2));
         num
-    };
+    });
 
     if intensity < 25 {
-
         println!(
-            // 今日は{}回腕立て伏せをしてください！
             "Today, do {} pushups!",
-            expensive_closure(intensity)
+            expensive_result.value(intensity)
         );
-
         println!(
-            // 次に、{}回腹筋をしてください！
             "Next, do {} situps!",
-            expensive_closure(intensity)
+            expensive_result.value(intensity)
         );
     } else {
         if random_number == 3 {
-            // 今日は休憩してください！水分補給を忘れずに！
             println!("Take a break today! Remember to stay hydrated!");
         } else {
             println!(
-                // 今日は、{}分間走ってください！
                 "Today, run for {} minutes!",
-                expensive_closure(intensity)
+                expensive_result.value(intensity)
             );
         }
     }
