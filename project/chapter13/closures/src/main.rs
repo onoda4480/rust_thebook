@@ -1,5 +1,11 @@
 use std::thread;
 use std::time::Duration;
+struct Cacher<T>
+    where T: Fn(u32) -> u32
+{
+    calculation: T,
+    value: Option<u32>,
+}
 
 fn generate_workout(intensity: u32, random_number: u32) {
     //クロージャでは、fn関数のように引数の型や戻り値の型を注釈する必要はなし
