@@ -2,7 +2,8 @@ use std::thread;
 use std::time::Duration;
 
 fn generate_workout(intensity: u32, random_number: u32) {
-    let expensive_closure = |num| {
+    //クロージャでは、fn関数のように引数の型や戻り値の型を注釈する必要はなし
+    let expensive_closure = |num: u32| -> u32  {
         println!("calculating slowly...");
         thread::sleep(Duration::from_secs(2));
         num
