@@ -1,29 +1,44 @@
 use std::thread;
+use std::hash::Hash;
 use std::time::Duration;
 use std::collections::HashMap;
-struct Cacher<T>
-    where T: Fn(u32) -> u32
+
+struct Cacher<T, K, V>
+    where
+        T: Fn(K) -> V,
+        //    ^     ^
+        //    │     └─ 戻り値の型
+        //    └─ 引数の型（T ではない！）
+        K: Eq + Hash + Copy,
+        V: Copy,
 {
     calculation: T,
-    value: HashMap<u32, u32>,
+    values: HashMap<K, V>,
+    //      ^^^^^^^^^^^^
+    //      ジェネリックにする（u32 ではない！）
 }
 
-impl<T> Cacher<T>
-    where T: Fn(u32) -> u32
+impl<T, K, V> Cacher<T, K, V>
+    where
+        T: Fn(K) -> V,
+        //    ^     ^
+        //    struct と同じにする
+        K: Eq + Hash + Copy,
+        V: Copy,
 {
-    fn new(calculation: T) -> Cacher<T> {
+    fn new(calculation: T) -> Cacher<T, K, V> {
         Cacher {
             calculation,
-            value: HashMap::new(),
+            values: HashMap::new(),
         }
     }
 
-    fn value(&mut self, arg: u32) -> u32 {
-        match self.value.get(&arg) {
+    fn value(&mut self, arg: K) -> V {
+        match self.values.get(&arg) {
             Some(&v) => v,
             None => {
                 let v = (self.calculation)(arg);
-                self.value.insert(arg, v);
+                self.values.insert(arg, v);
                 v
             },
         }
