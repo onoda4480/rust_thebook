@@ -10,7 +10,7 @@ pub struct Config {
 }
 
 impl Config {
-    pub fn new(args: &[String]) -> Result<Config, &'static str> {
+    pub fn new(mut args: std::env::Args) -> Result<Config, &'static str>{
         if args.len() < 3 {
             return Err("not enough arguments");
         }
