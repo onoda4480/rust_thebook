@@ -1,10 +1,7 @@
 [workspace]
+resolver = "2"
 
 members = [
     "adder",
     "add-one",
 ]
-
-[dependencies]
-
-add-one = { path = "../add-one" }
