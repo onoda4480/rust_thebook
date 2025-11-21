@@ -3,5 +3,5 @@
 version = 4
 
 [[package]]
-name = "cargo_and_crates"
+name = "cargo_and_crates_test"
 version = "0.1.0"

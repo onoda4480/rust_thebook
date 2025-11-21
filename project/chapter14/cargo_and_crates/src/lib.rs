@@ -32,6 +32,14 @@ pub mod utils {
     /// a secondary color.
     ///2つの主色を同じ割合で混合し、副色にする
     pub fn mix(c1: PrimaryColor, c2: PrimaryColor) -> SecondaryColor {
-        // --snip--
+        match (c1, c2) {
+            (PrimaryColor::Red, PrimaryColor::Yellow) |
+            (PrimaryColor::Yellow, PrimaryColor::Red) => SecondaryColor::Orange,
+            (PrimaryColor::Red, PrimaryColor::Blue) |
+            (PrimaryColor::Blue, PrimaryColor::Red) => SecondaryColor::Purple,
+            (PrimaryColor::Yellow, PrimaryColor::Blue) |
+            (PrimaryColor::Blue, PrimaryColor::Yellow) => SecondaryColor::Green,
+            _ => SecondaryColor::Orange,
+        }
     }
 }

@@ -1,10 +1,9 @@
 [package]
-name = "cargo_and_crates"
+name = "cargo_and_crates_test"
 version = "0.1.0"
-edition = "2024"
+edition = "2021"
 authors = ["Your Name <you@example.com>"]
 description = "A fun game where you guess what number the computer has chosen."
-              (コンピュータが選択した数字を言い当てる面白いゲーム)
 license = "MIT OR Apache-2.0"
 
 [dependencies]
