@@ -1,3 +1,10 @@
+extern crate art;
+
+use art::kinds::PrimaryColor;
+use art::utils::mix;
+
 fn main() {
-    println!("Hello, world!");
+    let red = PrimaryColor::Red;
+    let yellow = PrimaryColor::Yellow;
+    mix(red, yellow);
 }
