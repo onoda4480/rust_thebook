@@ -4,7 +4,9 @@
 //! #芸術
 //!
 //! 芸術的な概念をモデル化するライブラリ。
-
+pub use kinds::PrimaryColor;
+pub use kinds::SecondaryColor;
+pub use utils::mix;
 pub mod kinds {
     /// The primary colors according to the RYB color model.
     /// RYBカラーモデルによる主色
