@@ -1,18 +1,14 @@
-struct CustomSmartPointer {
-    data: String,
+enum List {
+    Cons(i32, Box<List>),
+    Nil,
 }
 
-impl Drop for CustomSmartPointer {
-    fn drop(&mut self) {
-        // CustomSmartPointerをデータ`{}`とともにドロップするよ
-        println!("Dropping CustomSmartPointer with data `{}`!", self.data);
-    }
-}
+use List::{Cons, Nil};
 
 fn main() {
-    let c = CustomSmartPointer { data: String::from("some data") };
-    println!("CustomSmartPointer created.");
-    drop(c);
-    // CustomSmartPointerはmainが終わる前にドロップされた
-    println!("CustomSmartPointer dropped before the end of main.");
+    let a = Cons(5,
+        Box::new(Cons(10,
+            Box::new(Nil))));
+    let b = Cons(3, Box::new(a));
+    let c = Cons(4, Box::new(a));
 }
