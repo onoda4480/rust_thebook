@@ -16,11 +16,10 @@ impl<T> Deref for MyBox<T> {
 }
 
 fn main() {
-    let x = 5;
-    let y = MyBox::new(x);
-
-    assert_eq!(5, x);
-    assert_eq!(5, *y);
+    let m = MyBox::new(String::from("Rust"));
+    hello(&m);
+    //参照外し型強制が無いと以下のように書く必要がある
+    //hello(&(*m)[..]);
 }
 
 fn hello(name: &str) {
