@@ -12,7 +12,7 @@ impl Drop for CustomSmartPointer {
 fn main() {
     let c = CustomSmartPointer { data: String::from("some data") };
     println!("CustomSmartPointer created.");
-    c.drop();
-    // mainの終端の前にCustomSmartPointerがドロップされた
+    drop(c);
+    // CustomSmartPointerはmainが終わる前にドロップされた
     println!("CustomSmartPointer dropped before the end of main.");
 }
