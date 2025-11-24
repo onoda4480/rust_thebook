@@ -7,9 +7,10 @@ fn main() {
     thread::spawn(move || {
         let val = String::from("hi");
         tx.send(val).unwrap();
+        // valは{}
+        println!("val is {}", val);
     });
 
     let received = rx.recv().unwrap();
-    // 値は{}です
     println!("Got: {}", received);
 }
