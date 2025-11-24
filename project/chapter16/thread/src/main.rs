@@ -8,4 +8,8 @@ fn main() {
         let val = String::from("hi");
         tx.send(val).unwrap();
     });
+
+    let received = rx.recv().unwrap();
+    // 値は{}です
+    println!("Got: {}", received);
 }
