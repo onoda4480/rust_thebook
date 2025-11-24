@@ -19,6 +19,20 @@ fn main() {
             thread::sleep(Duration::from_secs(1));
         }
     });
+    let tx2 = mpsc::Sender::clone(&tx);
+    thread::spawn(move || {
+        let vals = vec![
+            String::from("hello"),
+            String::from("dear"),
+            String::from("stranger"),
+            String::from("kun"),
+        ];
+
+        for val in vals {
+            tx2.send(val).unwrap();
+            thread::sleep(Duration::from_secs(1));
+        }
+    });
 
     thread::spawn(move || {
         // 君のためにもっとメッセージを(more messages for you)
