@@ -1,6 +1,6 @@
-extern crate gui;
 use gui::Draw;
 use gui::{Screen, Button};
+
 struct SelectBox {
     width: u32,
     height: u32,
@@ -11,6 +11,7 @@ impl Draw for SelectBox {
     fn draw(&self) {
         // code to actually draw a select box
         //セレクトボックスを実際に描画するコード
+        println!("セレクトボックスを描画: {:?}", self.options);
     }
 }
 

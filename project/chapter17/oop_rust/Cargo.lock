@@ -3,5 +3,12 @@
 version = 4
 
 [[package]]
+name = "gui"
+version = "0.1.0"
+
+[[package]]
 name = "oop_rust"
 version = "0.1.0"
+dependencies = [
+ "gui",
+]
