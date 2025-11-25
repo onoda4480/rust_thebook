@@ -1,6 +1,6 @@
 extern crate gui;
 use gui::Draw;
-
+use gui::{Screen, Button};
 struct SelectBox {
     width: u32,
     height: u32,
@@ -12,4 +12,31 @@ impl Draw for SelectBox {
         // code to actually draw a select box
         //セレクトボックスを実際に描画するコード
     }
+}
+
+fn main() {
+    let screen = Screen {
+        components: vec![
+            Box::new(SelectBox {
+                width: 75,
+                height: 10,
+                options: vec![
+                    // はい
+                    String::from("Yes"),
+                    // 多分
+                    String::from("Maybe"),
+                    // いいえ
+                    String::from("No")
+                ],
+            }),
+            Box::new(Button {
+                width: 50,
+                height: 10,
+                // 了解
+                label: String::from("OK"),
+            }),
+        ],
+    };
+
+    screen.run();
 }
