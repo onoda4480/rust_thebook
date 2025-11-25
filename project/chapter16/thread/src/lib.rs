@@ -1,15 +1,18 @@
 extern crate gui;
 use gui::Draw;
-
-struct SelectBox {
-    width: u32,
-    height: u32,
-    options: Vec<String>,
+pub trait Draw {
+    fn draw(&self);
 }
 
-impl Draw for SelectBox {
+pub struct Button {
+    pub width: u32,
+    pub height: u32,
+    pub label: String,
+}
+
+impl Draw for Button {
     fn draw(&self) {
-        // code to actually draw a select box
-        //セレクトボックスを実際に描画するコード
+        // code to actually draw a button
+        // 実際にボタンを描画するコード
     }
 }
