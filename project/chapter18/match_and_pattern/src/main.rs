@@ -1,11 +1,10 @@
 #![allow(unused)]
 fn main() {
-let v = vec!['a', 'b', 'c'];
-
-for (index, value) in v.iter().enumerate() {
-    println!("{} is at index {}", value, index);
-    //enumerateメソッドを使用してイテレータを改造し、
-    //値とその値のイテレータでの添え字をタプルに配置して生成
-    //enumerateの最初の呼び出しは、タプル(0, 'a')を生成
-}
+    //let式もパターンマッチを使って値を変数に束縛している。
+    let a = 5;
+    let (x, y, z) = (1, 2, 3);
+    println!("a: {}", a);
+    println!("x: {}, y: {}, z: {}", x, y, z);
+    //以下はコンパイルエラーになる例
+    //let (x, y) = (1, 2, 3);
 }
