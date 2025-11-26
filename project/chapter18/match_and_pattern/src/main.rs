@@ -1,14 +1,11 @@
 #![allow(unused)]
 fn main() {
-let x = 1;
+let x = 5;
 
 match x {
-    // 1か2
-    // 「|」はorを意味する
-    1 | 2 => println!("one or two"),
-    // 3
-    3 => println!("three"),
-    // なんでも
-    _ => println!("anything"),
+    // 1から5まで
+    1..=5 => println!("one through five"),
+    // それ以外
+    _ => println!("something else"),
 }
 }
