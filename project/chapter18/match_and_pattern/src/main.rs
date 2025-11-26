@@ -1,10 +1,12 @@
 #![allow(unused)]
 fn main() {
-let x = 5;
-
+let x = 'c';
+//charの範囲パターンマッチ
 match x {
-    // 1から5まで
-    1..=5 => println!("one through five"),
+    // ASCII文字前半
+    'a'..='j' => println!("early ASCII letter"),
+    // ASCII文字後半
+    'k'..='z' => println!("late ASCII letter"),
     // それ以外
     _ => println!("something else"),
 }
