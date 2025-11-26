@@ -1,12 +1,8 @@
 #![allow(unused)]
 fn main() {
-let mut stack = Vec::new();
+let v = vec!['a', 'b', 'c'];
 
-stack.push(1);
-stack.push(2);
-stack.push(3);
-
-while let Some(top) = stack.pop() {
-    println!("{}", top);
+for (index, value) in v.iter().enumerate() {
+    println!("{} is at index {}", value, index);
 }
 }
