@@ -1,10 +1,16 @@
-#![allow(unused)]
+fn foo(x: i32) {
+    //関数シグニチャが引数にパターンを使用している例
+    // コードがここに来る
+    // code goes here
+}
+
+fn print_coordinates(&(x, y): &(i32, i32)) {
+    // 現在の位置: ({}, {})
+    //値&(3, 5)はパターン&(x, y)と合致する
+    println!("Current location: ({}, {})", x, y);
+}
+
 fn main() {
-    //let式もパターンマッチを使って値を変数に束縛している。
-    let a = 5;
-    let (x, y, z) = (1, 2, 3);
-    println!("a: {}", a);
-    println!("x: {}, y: {}, z: {}", x, y, z);
-    //以下はコンパイルエラーになる例
-    //let (x, y) = (1, 2, 3);
+    let point = (3, 5);
+    print_coordinates(&point);
 }
