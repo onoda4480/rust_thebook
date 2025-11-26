@@ -1,17 +1,14 @@
+#![allow(unused)]
 fn main() {
-    let x = Some(5);
-    let y = 10;
+let x = 1;
 
-    match x {
-        // 50だったよ
-        Some(50) => println!("Got 50"),
-        // マッチしたよ
-        //このyは新しいy変数であり、最初に値10で宣言したyではない
-        Some(y) => println!("Matched, y = {:?}", y),
-        // 既定のケース
-        _ => println!("Default case, x = {:?}", x),
-    }
-
-    // 最後にはx = {}, y = {}
-    println!("at the end: x = {:?}, y = {:?}", x, y);
+match x {
+    // 1か2
+    // 「|」はorを意味する
+    1 | 2 => println!("one or two"),
+    // 3
+    3 => println!("three"),
+    // なんでも
+    _ => println!("anything"),
+}
 }
