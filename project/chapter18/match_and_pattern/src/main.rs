@@ -15,4 +15,5 @@ let sum_of_squares: i32 = points
     .iter()
     .map(|&Point { x, y }| x * x + y * y)
     .sum();
+println!("Sum of squares: {}", sum_of_squares);
 }
