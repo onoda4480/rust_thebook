@@ -1,11 +1,7 @@
-#![allow(unused)]
 fn main() {
-let numbers = (2, 4, 8, 16, 32);
-
-match numbers {
-    (first, _, third, _, fifth) => {
-        // 何らかの数値: {}, {}, {}
-        println!("Some numbers: {}, {}, {}", first, third, fifth)
-    },
-}
+    let _x = 5;
+    let y = 10;
+    //xは使われていないので_で始まる名前にする
+    //そうすることでコンパイラの警告を防げる
+    //コンパイル時の警告はyだけになる
 }
