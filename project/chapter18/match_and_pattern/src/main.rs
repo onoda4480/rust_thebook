@@ -1,13 +1,12 @@
-#![allow(unused)]
-fn main() {
-let x = 'c';
-//charの範囲パターンマッチ
-match x {
-    // ASCII文字前半
-    'a'..='j' => println!("early ASCII letter"),
-    // ASCII文字後半
-    'k'..='z' => println!("late ASCII letter"),
-    // それ以外
-    _ => println!("something else"),
+struct Point {
+    x: i32,
+    y: i32,
 }
+
+fn main() {
+    let p = Point { x: 0, y: 7 };
+
+    let Point { x: a, y: b } = p;
+    assert_eq!(0, a);
+    assert_eq!(7, b);
 }
