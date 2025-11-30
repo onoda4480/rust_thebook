@@ -1,14 +1,15 @@
 fn main() {
-    let x = Some(5);
-    let y = 10;
+    let x = 4;
+    let y = false;
 
     match x {
-        Some(50) => println!("Got 50"),
-        Some(n) if n == y => println!("Matched, n = {:?}", n),
-        //Some(y)だと外側のyがシャドーイング(覆い隠される)されるため
-        //y==yとなり常に真になってしまう
-        _ => println!("Default case, x = {:?}", x),
-    }
+        // はい
+        4 | 5 | 6 if y => println!("yes"),
+        // 4、5、6のいずれかであり、かつyがtrueの場合にマッチします。
+        //(4 | 5 | 6) if y =>です。
+        //決して4 | 5 | (6 if y) => ではない
 
-    println!("at the end: x = {:?}, y = {:?}", x, y);
+        // いいえ
+        _ => println!("no"),
+    }
 }
