@@ -1,10 +1,14 @@
 fn main() {
-    let num = Some(4);
+    let x = Some(5);
+    let y = 10;
 
-    match num {
-        // 5未満です: {}
-        Some(x) if x < 5 => println!("less than five: {}", x),
-        Some(x) => println!("{}", x),
-        None => (),
+    match x {
+        Some(50) => println!("Got 50"),
+        Some(n) if n == y => println!("Matched, n = {:?}", n),
+        //Some(y)だと外側のyがシャドーイング(覆い隠される)されるため
+        //y==yとなり常に真になってしまう
+        _ => println!("Default case, x = {:?}", x),
     }
+
+    println!("at the end: x = {:?}, y = {:?}", x, y);
 }
