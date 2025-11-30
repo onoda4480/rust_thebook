@@ -1,11 +1,10 @@
 fn main() {
-    let mut robot_name = Some(String::from("Bors"));
+    let num = Some(4);
 
-    match robot_name {
-        // 別の名前
-        Some(ref mut name) => *name = String::from("Another name"),
+    match num {
+        // 5未満です: {}
+        Some(x) if x < 5 => println!("less than five: {}", x),
+        Some(x) => println!("{}", x),
         None => (),
     }
-
-    println!("robot_name is: {:?}", robot_name);
 }
