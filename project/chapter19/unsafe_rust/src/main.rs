@@ -1,10 +1,14 @@
-#![allow(unused)]
+unsafe extern "C" {
+    fn abs(input: i32) -> i32;
+    // C標準ライブラリのabs関数を宣言
+    //thebookだとunsafeなしで宣言していたが、
+    //Rust 1.63以降はunsafeが必要らしい
+}
+
 fn main() {
-    use std::slice;
-
-    let address = 0x012345usize;
-    let r = address as *mut i32;
-
-    let slice = unsafe { slice::from_raw_parts_mut(r, 10000) };
-    //sliceを有効なスライスであるかのように使用しようとすると、未定義動作が発生します
+    unsafe {
+        // -3の絶対値は、Cによると{}
+        // unsafeブロック内で呼び出す必要がある
+        println!("Absolute value of -3 according to C: {}", abs(-3));
+    }
 }
