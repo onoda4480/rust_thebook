@@ -1,28 +1,10 @@
 #![allow(unused)]
-
-use std::slice;
 fn main() {
-    let mut v = vec![1, 2, 3, 4, 5, 6];
+    use std::slice;
 
-    let r = &mut v[..];
+    let address = 0x012345usize;
+    let r = address as *mut i32;
 
-    let (a, b) = r.split_at_mut(3);
-
-    assert_eq!(a, &mut [1, 2, 3]);
-    assert_eq!(b, &mut [4, 5, 6]);
-}
-
-fn split_at_mut(slice: &mut [i32], mid: usize) -> (&mut [i32], &mut [i32]) {
-    let len = slice.len();
-    let ptr = slice.as_mut_ptr();
-    //as_mut_ptrメソッドを使用してスライスの生ポインタにアクセスしている
-
-    assert!(mid <= len);
-
-    unsafe {
-        (
-            slice::from_raw_parts_mut(ptr, mid),
-            slice::from_raw_parts_mut(ptr.offset(mid as isize), len - mid),
-        )
-    }
+    let slice = unsafe { slice::from_raw_parts_mut(r, 10000) };
+    //sliceを有効なスライスであるかのように使用しようとすると、未定義動作が発生します
 }
