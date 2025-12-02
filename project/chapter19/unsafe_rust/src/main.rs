@@ -1,8 +1,15 @@
 #![allow(unused)]
 fn main() {
-    let address = 0x012345usize;
-    let r = address as *const i32;
-    //メモリが確保されていないアドレスを参照しようとしているため、
-    //そのアドレスにデータがある可能性もあるし、ない可能性もあるので、
-    //安全ではない操作として扱われる
+    let mut num = 5;
+
+    let r1 = &num as *const i32;
+    let r2 = &mut num as *mut i32;
+
+    unsafe {
+        println!("r1 is: {}", *r1);
+        println!("r2 is: {}", *r2);
+    }
+    //ポインタの生成だけでは安全だが,
+    //ポインタが指している値にアクセスしようとすると未定義動作を引き起こす可能性がある.
+    //そのためunsafeブロック内でのみ使用可能
 }
