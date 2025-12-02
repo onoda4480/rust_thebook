@@ -1,23 +1,9 @@
-static mut COUNTER: u32 = 0;
-
-fn add_to_count(inc: u32) {
-    unsafe {
-        COUNTER += inc;
-    }
+unsafe trait Foo {
+    // methods go here
+    // メソッドがここに来る
 }
 
-fn main() {
-    add_to_count(3);
-
-    unsafe {
-        // Rust 2024: 参照を作らず、値を直接読む
-        let count = COUNTER;
-        println!("COUNTER: {}", count);
-    }
-    //Rust 2024では、static mutへの参照作成がデフォルトで禁止された
-    // Rust 2024以前のコード:
-    // unsafe {
-    //     let count = &COUNTER;
-    //     println!("COUNTER: {}", *count);
-    // }
+unsafe impl Foo for i32 {
+    // method implementations go here
+    // メソッドの実装がここに来る
 }
