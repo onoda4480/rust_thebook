@@ -1,4 +1,8 @@
 use std::fmt;
+struct Point {
+    x: i32,
+    y: i32,
+}
 
 trait OutlinePrint: fmt::Display {
     fn outline_print(&self) {
@@ -9,5 +13,11 @@ trait OutlinePrint: fmt::Display {
         println!("* {} *", output);
         println!("*{}*", " ".repeat(len + 2));
         println!("{}", "*".repeat(len + 4));
+    }
+}
+//PointにはDisplayがないので実装しないと上記のOutlinePrintトレイトを使えない
+impl fmt::Display for Point {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        write!(f, "({}, {})", self.x, self.y)
     }
 }
