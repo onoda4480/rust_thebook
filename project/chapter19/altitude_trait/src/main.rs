@@ -28,3 +28,7 @@ impl Human {
         println!("*waving arms furiously*");
     }
 }
+fn main() {
+    let person = Human;
+    person.fly();
+}
