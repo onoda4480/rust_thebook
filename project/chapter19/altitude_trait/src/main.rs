@@ -1,36 +1,24 @@
-trait Pilot {
-    fn fly(&self);
+trait Animal {
+    fn baby_name() -> String;
 }
 
-trait Wizard {
-    fn fly(&self);
-}
+struct Dog;
 
-struct Human;
-
-impl Pilot for Human {
-    fn fly(&self) {
-        // キャプテンのお言葉
-        println!("This is your captain speaking.");
+impl Dog {
+    fn baby_name() -> String {
+        // スポット(Wikipediaによると、飼い主の事故死後もその人の帰りを待つ忠犬の名前の模様)
+        String::from("Spot")
     }
 }
 
-impl Wizard for Human {
-    fn fly(&self) {
-        // 上がれ！
-        println!("Up!");
+impl Animal for Dog {
+    fn baby_name() -> String {
+        // 子犬
+        String::from("puppy")
     }
 }
 
-impl Human {
-    fn fly(&self) {
-        // *激しく腕を振る*
-        println!("*waving arms furiously*");
-    }
-}
 fn main() {
-    let person = Human;
-    Pilot::fly(&person);
-    Wizard::fly(&person);
-    person.fly();
+    // 赤ちゃん犬は{}と呼ばれる
+    println!("A baby dog is called a {}", Dog::baby_name());
 }
