@@ -1,26 +1,30 @@
-use std::ops::Add;
-
-#[derive(Debug, PartialEq)]
-struct Point {
-    x: i32,
-    y: i32,
+trait Pilot {
+    fn fly(&self);
 }
 
-impl Add for Point {
-    type Output = Point;
+trait Wizard {
+    fn fly(&self);
+}
 
-    fn add(self, other: Point) -> Point {
-        Point {
-            x: self.x + other.x,
-            y: self.y + other.y,
-        }
+struct Human;
+
+impl Pilot for Human {
+    fn fly(&self) {
+        // キャプテンのお言葉
+        println!("This is your captain speaking.");
     }
 }
 
-fn main() {
-    assert_eq!(
-        Point { x: 1, y: 0 } + Point { x: 2, y: 3 },
-        Point { x: 3, y: 3 }
-    );
-    //+でaddが動いている
+impl Wizard for Human {
+    fn fly(&self) {
+        // 上がれ！
+        println!("Up!");
+    }
+}
+
+impl Human {
+    fn fly(&self) {
+        // *激しく腕を振る*
+        println!("*waving arms furiously*");
+    }
 }
