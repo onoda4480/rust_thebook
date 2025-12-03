@@ -23,6 +23,10 @@ impl Animal for Dog {
 //     println!("A baby dog is called a {}", Dog::baby_name());
 // }
 
+// fn main() {
+//     println!("A baby dog is called a {}", Animal::baby_name());
+// } コンパイルエラー！
+
 fn main() {
-    println!("A baby dog is called a {}", Animal::baby_name());
-}
+    println!("A baby dog is called a {}", <Dog as Animal>::baby_name());
+} //フルパスでDog内Animalトレイト用いることを明記
