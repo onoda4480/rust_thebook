@@ -18,7 +18,11 @@ impl Animal for Dog {
     }
 }
 
+// fn main() {
+//     // 赤ちゃん犬は{}と呼ばれる
+//     println!("A baby dog is called a {}", Dog::baby_name());
+// }
+
 fn main() {
-    // 赤ちゃん犬は{}と呼ばれる
-    println!("A baby dog is called a {}", Dog::baby_name());
+    println!("A baby dog is called a {}", Animal::baby_name());
 }
