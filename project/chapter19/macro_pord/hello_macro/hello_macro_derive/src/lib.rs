@@ -1,14 +1,17 @@
-pub fn add(left: u64, right: u64) -> u64 {
-    left + right
-}
+extern crate proc_macro;
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+use proc_macro::TokenStream;
+use quote::quote;
+use syn;
 
-    #[test]
-    fn it_works() {
-        let result = add(2, 2);
-        assert_eq!(result, 4);
-    }
+#[proc_macro_derive(HelloMacro)]
+pub fn hello_macro_derive(input: TokenStream) -> TokenStream {
+    // 操作可能な構文木としてのRustコードの表現を構築する
+    // Construct a representation of Rust code as a syntax tree
+    // that we can manipulate
+    let ast = syn::parse(input).unwrap();
+
+    // トレイトの実装内容を構築
+    // Build the trait implementation
+    impl_hello_macro(&ast)
 }
