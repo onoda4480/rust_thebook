@@ -76,3 +76,13 @@ impl Worker {
         Worker { id, thread }
     }
 }
+impl Drop for ThreadPool {
+    fn drop(&mut self) {
+        for worker in &mut self.workers {
+            // ワーカー{}を終了します
+            println!("Shutting down worker {}", worker.id);
+
+            worker.thread.join().unwrap();
+        }
+    }
+}
