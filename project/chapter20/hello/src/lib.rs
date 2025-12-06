@@ -7,7 +7,6 @@ pub struct ThreadPool {
     workers: Vec<Worker>,
     sender: mpsc::Sender<Job>,
 }
-struct Job;
 trait FnBox {
     fn call_box(self: Box<Self>);
 }
@@ -18,7 +17,7 @@ impl<F: FnOnce()> FnBox for F {
     }
 }
 
-type Job = Box<FnBox + Send + 'static>;
+type Job = Box<dyn FnBox + Send + 'static>;
 impl ThreadPool {
     /// 新しいThreadPoolを生成する。
     ///
