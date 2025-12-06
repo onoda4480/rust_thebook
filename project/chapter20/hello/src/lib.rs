@@ -56,8 +56,15 @@ struct Worker {
 
 impl Worker {
     fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
-        let thread = thread::spawn(|| {
-            receiver;
+        let thread = thread::spawn(move || {
+            loop {
+                let job = receiver.lock().unwrap().recv().unwrap();
+
+                // ワーカー{}は仕事を得ました; 実行します
+                println!("Worker {} got a job; executing.", id);
+
+                (*job)();
+            }
         });
 
         Worker { id, thread }
