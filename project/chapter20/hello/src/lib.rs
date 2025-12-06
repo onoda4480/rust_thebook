@@ -1,7 +1,8 @@
 use std::thread;
 pub struct ThreadPool {
-    threads: Vec<thread::JoinHandle<()>>,
+    workers: Vec<Worker>,
 }
+
 impl ThreadPool {
     /// 新しいThreadPoolを生成する。
     ///
