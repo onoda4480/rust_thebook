@@ -8,7 +8,17 @@ pub struct ThreadPool {
     sender: mpsc::Sender<Job>,
 }
 struct Job;
-type Job = Box<FnOnce() + Send + 'static>;
+trait FnBox {
+    fn call_box(self: Box<Self>);
+}
+
+impl<F: FnOnce()> FnBox for F {
+    fn call_box(self: Box<F>) {
+        (*self)()
+    }
+}
+
+type Job = Box<FnBox + Send + 'static>;
 impl ThreadPool {
     /// 新しいThreadPoolを生成する。
     ///
@@ -56,15 +66,12 @@ struct Worker {
 
 impl Worker {
     fn new(id: usize, receiver: Arc<Mutex<mpsc::Receiver<Job>>>) -> Worker {
-        let thread = thread::spawn(move || {
-            loop {
-                let job = receiver.lock().unwrap().recv().unwrap();
+        let thread = thread::spawn(move || loop {
+            let job = receiver.lock().unwrap().recv().unwrap();
 
-                // ワーカー{}は仕事を得ました; 実行します
-                println!("Worker {} got a job; executing.", id);
+            println!("Worker {} got a job; executing.", id);
 
-                (*job)();
-            }
+            job.call_box();
         });
 
         Worker { id, thread }
